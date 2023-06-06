@@ -2,11 +2,15 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+// Whoever deploy this contract is the person who wants to sell their tokens.
+// They can sell any kind of ER20 token that they want. In our case it's going to be EduCoin token.
+// They just have to send the address of the token contract.
+// Only the owner of the specific contract to be sold--in this case, me--can sell their token for the price they believe appropriate.
 contract DEX {
-    IERC20 public associatedToken;
+    IERC20 public associatedToken; // EduToken
 
-    uint256 price;
-    address owner;
+    uint256 price; // Price to be sold for.
+    address owner; // Owner or deployer of this contract
 
     constructor(IERC20 _token, uint256 _price) {
         associatedToken = _token;
@@ -23,7 +27,7 @@ contract DEX {
         uint256 allowance = associatedToken.allowance(
             msg.sender,
             address(this)
-        );
+        ); // Checks if this contract has allowance to sell EduCoin tokens from owner.
         require(
             allowance > 0,
             "you must allow this contract access to at least one token"

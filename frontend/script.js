@@ -65,15 +65,11 @@ async function grantAccess() {
   const value = document.getElementById("tokenGrant").value;
   await tokenContract
     .approve(dexAddress, value)
-    .then(() => alert("success"))
+    .then(() => alert("Approved"))
     .catch((error) => alert(error));
-}
-
-async function sell() {
-  await getAccess();
   await dexContract
     .sell()
-    .then(() => alert("Success"))
+    .then(() => alert("Access Granted"))
     .catch((error) => alert(error));
 }
 
